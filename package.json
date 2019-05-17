@@ -1,29 +1,47 @@
 {
-  "name": "react-native-acknowledgements",
+  "name": "react-native-acknowledgements-ts",
   "version": "0.1.0",
   "description": "Fufills open source license obligations for react native projects.",
-  "bin": "bin/generate-acknowledgements",
-  "main": "index.js",
+  "bin": "lib/cli.js",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "typings": "lib/index.d.ts",
   "directories": {
     "doc": "docs"
   },
+  "TODO (not ordered)": [
+    "- Add bin entrypoint and make it work.",
+    "- Convert to TS",
+    "- set up prettier",
+    "- Configure linting",
+    "- Add tests",
+    "- Upgrade all dependencies",
+    "- remove Babel, it will be TS",
+    "- setup rollup",
+    "- setup CI",
+    "- release from CI",
+    "- add contributing, etc",
+    "- android part"
+  ],
   "scripts": {
-    "ci": "npm run lint",
-    "lint": "eslint ./"
+    "clean": "rimraf ./lib",
+    "lint": "eslint ./",
+    "build": "rollup -c=./rollup.config.js",
+    "prebuild": "yarn clean && yarn lint"
   },
   "files": [
-    "build",
-    "src"
+    "lib"
   ],
   "dependencies": {
-    "tldrlegal": "^1.0.6",
-    "commander": "^2.9.0",
+    "commander": "^2.20.0",
     "legally": "^2.8.1",
-    "shelljs": "^0.7.0",
     "plist": "^2.1.0",
+    "shelljs": "^0.7.0",
+    "tldrlegal": "^1.0.6",
     "xcode": "^1.0.0"
   },
   "devDependencies": {
+    "@types/commander": "^2.12.2",
     "babel-eslint": "^6.1.2",
     "babel-plugin-module-resolver": "^2.3.0",
     "babel-preset-airbnb": "^1.1.1",
@@ -32,11 +50,18 @@
     "eslint-config-airbnb": "^10.0.1",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-prefer-object-spread": "^1.1.0",
-    "eslint-plugin-react": "^6.1.2",
     "lodash": "^4.17.2",
+    "prettier": "1.17.1",
     "prop-types": "^15.5.10",
     "react": "16.0.0",
-    "react-native": "0.51.0"
+    "react-native": "0.51.0",
+    "rollup": "^1.12.1",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.0.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-typescript2": "^0.21.0",
+    "temp-dir": "^2.0.0",
+    "typescript": "^3.4.5"
   },
   "repository": {
     "type": "git",
@@ -46,9 +71,9 @@
     "url": "https://github.com/phillbaker/react-native-acknowledgements/issues"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.10",
     "react": "16.0.0",
-    "react-native": ">=0.48 <1.0.0",
-    "prop-types": "^15.5.10"
+    "react-native": ">=0.48 <1.0.0"
   },
   "keywords": [
     "react",
